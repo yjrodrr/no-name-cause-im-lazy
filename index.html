@@ -25,7 +25,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 48px;
+      gap: 24px;
       animation: fadeIn 1s ease both;
     }
     @keyframes fadeIn {
@@ -34,7 +34,7 @@
     }
     .title {
       font-family: 'Courier Prime', monospace;
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
       font-weight: 700;
       letter-spacing: 0.18em;
       color: #e8e8e0;
@@ -49,11 +49,9 @@
       min-width: 1.2em;
       text-align: center;
     }
-
     .title .suffix {
       margin-left: 0.05em;
     }
-
     input[type="text"] {
       background: transparent;
       border: 1px solid #444;
@@ -70,11 +68,9 @@
       caret-color: #e8e8e0;
       transition: border-color 0.3s;
     }
-
     input[type="text"]:focus {
       border-color: #888;
     }
-
     input[type="text"]::placeholder {
       color: #333;
       letter-spacing: 0.1em;
