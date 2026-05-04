@@ -16,7 +16,6 @@
       margin: 0;
       padding: 0;
     }
-
     html, body {
       height: 100%;
       background: #080808;
@@ -27,7 +26,6 @@
       justify-content: center;
       overflow: hidden;
     }
-
     .center {
       display: flex;
       flex-direction: column;
@@ -35,27 +33,20 @@
       gap: 24px;
       animation: fadeIn 1s ease both;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .equation-row {
       display: flex;
       align-items: center;
       gap: 16px;
       font-family: 'Courier Prime', monospace;
-      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      font-size: clamp(2rem, 5vw, 3.2rem); /* main text */
       font-weight: 700;
       color: #e8e8e0;
       white-space: nowrap;
     }
-
-    .eq-result {
-      color: #e8e8e0;
-    }
-
     input[type="text"] {
       background: transparent;
       border: 1px solid #444;
@@ -72,11 +63,9 @@
       caret-color: #e8e8e0;
       transition: border-color 0.3s;
     }
-
     input[type="text"]:focus {
       border-color: #888;
     }
-
     input[type="text"]::placeholder {
       color: #333;
       letter-spacing: 0.1em;
@@ -86,21 +75,15 @@
 <body>
   <div class="center">
     <div class="equation-row">
-      <span>73 / 65 = </span>
-      <span class="eq-result">37</span>
+      <span>73 / 65 = 37</span>
     </div>
     <div class="equation-row">
-      <span>95 / 16 = </span>
+      <span>95 / 16 =</span>
       <input type="text" id="answer" placeholder="..." autocomplete="off" spellcheck="false" />
     </div>
   </div>
-
   <script>
     const input = document.getElementById("answer");
-    
-    input.addEventListener("input", () => {
-      input.value = input.value.replace(/[^0-9]/g, "");
-    });
 
     const _h2 = "GRk=";
     const _k  = 42;
