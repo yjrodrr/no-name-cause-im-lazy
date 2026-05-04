@@ -56,7 +56,7 @@
     }
 
     .title .suffix {
-    margin-left: 0.05em;
+      margin-left: 0.05em;
     }
 
     input[type="text"] {
@@ -93,11 +93,10 @@
   </div>
 
   <script>
-
-    const encoded  = [ 18, 6, 24, 15, 12];
+    const encoded  = [18, 6, 24, 15, 12];
     const suffix   = "|c";
     const CHARS    = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    const SCRAMBLE_DURATION = 900;
+    const SCRAMBLE_DURATION = 2000;
     const FRAME_INTERVAL    = 55;
     const STAGGER           = 200;
 
@@ -143,14 +142,14 @@
     spans.forEach(({ span, target }, i) => {
       scrambleResolve(span, target, i * STAGGER);
     });
-      
+
     const input = document.getElementById("answer");
 
     input.addEventListener("input", () => {
       input.value = input.value.replace(/[^a-zA-Z]/g, "");
     });
 
-input.addEventListener("keydown", e => {
+    input.addEventListener("keydown", e => {
       if (
         !/^[a-zA-Z]$/.test(e.key) &&
         !["Backspace","Delete","ArrowLeft","ArrowRight","Tab","Enter"].includes(e.key)
@@ -159,13 +158,20 @@ input.addEventListener("keydown", e => {
       }
     });
 
-    const ANSWER = 'tutwpiszoddpowiedz';
+    // hasło zakodowane XOR z kluczem 42, potem Base64
+    // oryginał: "oculi"
+    const _h = "ZVlXYkw=";
+    const _k = 42;
 
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        if (input.value.toLowerCase() === ANSWER) {
-          sessionStorage.setItem('puzzle1_solved', 'true');
-          window.location.href = 'puzzle2.html';
+    function _d(s) {
+      return atob(s).split("").map(c => String.fromCharCode(c.charCodeAt(0) ^ _k)).join("");
+    }
+
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        if (input.value.toLowerCase() === _d(_h)) {
+          sessionStorage.setItem("puzzle1_solved", "true");
+          window.location.href = "duo.html";
         }
       }
     });
