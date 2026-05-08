@@ -71,54 +71,26 @@
       letter-spacing: 0.1em;
     }
 
-    #glitch-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0;
+    .center.glitch {
+      animation: glitch-content 1.2s steps(1) forwards;
     }
-    #glitch-overlay.active {
-      animation: glitch-sequence 1.2s steps(1) forwards;
-    }
-    @keyframes glitch-sequence {
-      0%   { opacity: 1; background: #080808; }
-      8%   { background: #080808; transform: translate(-6px, 2px); filter: hue-rotate(90deg); }
-      16%  { background: #fff; transform: translate(4px, -3px); filter: invert(1); }
-      24%  { background: #080808; transform: translate(-8px, 0px); filter: hue-rotate(180deg); }
-      32%  { background: #080808; transform: translate(0, 5px); filter: none; }
-      40%  { background: #fff; transform: translate(6px, -2px); filter: invert(1) hue-rotate(270deg); }
-      48%  { background: #080808; transform: translate(-3px, 3px); filter: hue-rotate(45deg); }
-      56%  { background: #080808; transform: translate(5px, 0); filter: none; }
-      64%  { background: #fff; transform: translate(-4px, -4px); filter: invert(1); }
-      72%  { background: #080808; transform: translate(2px, 2px); filter: hue-rotate(120deg); }
-      80%  { background: #080808; transform: translate(0, 0); filter: none; }
-      88%  { background: #080808; transform: translate(-2px, 1px); filter: hue-rotate(60deg); }
-      100% { background: #080808; transform: translate(0, 0); opacity: 1; }
-    }
-
-    #glitch-overlay.active::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(255,255,255,0.03) 3px,
-        rgba(255,255,255,0.03) 4px
-      );
-      animation: scanlines 0.1s linear infinite;
-    }
-    @keyframes scanlines {
-      from { background-position: 0 0; }
-      to   { background-position: 0 4px; }
+    @keyframes glitch-content {
+      0%   { transform: translate(0, 0);     filter: none; }
+      10%  { transform: translate(-8px, 2px);  filter: hue-rotate(90deg) brightness(2); }
+      20%  { transform: translate(6px, -4px);  filter: invert(1); }
+      30%  { transform: translate(-4px, 6px);  filter: hue-rotate(180deg); }
+      40%  { transform: translate(8px, -2px);  filter: invert(1) brightness(3); }
+      50%  { transform: translate(-6px, 4px);  filter: hue-rotate(270deg); }
+      60%  { transform: translate(4px, -6px);  filter: invert(1); }
+      70%  { transform: translate(-2px, 2px);  filter: hue-rotate(45deg) brightness(2); }
+      80%  { transform: translate(6px, 0);     filter: invert(1); }
+      90%  { transform: translate(-4px, -2px); filter: hue-rotate(120deg); }
+      100% { transform: translate(0, 0);     filter: none; }
     }
   </style>
 </head>
 <body>
-  <div id="glitch-overlay"></div>
-  <div class="center">
+  <div class="center" id="center">
     <div class="equation-row">
       <span>73 / 65 = 37</span>
     </div>
@@ -128,8 +100,8 @@
     </div>
   </div>
   <script>
-    const input   = document.getElementById("answer");
-    const overlay = document.getElementById("glitch-overlay");
+    const input  = document.getElementById("answer");
+    const center = document.getElementById("center");
 
     const _h2 = "Hxs=";
     const _k  = 42;
@@ -142,7 +114,7 @@
       if (e.key === "Enter") {
         if (input.value === _d(_h2)) {
           sessionStorage.setItem("puzzle2_solved", "true");
-          overlay.classList.add("active");
+          center.classList.add("glitch");
           setTimeout(() => {
             window.location.href = "tres.html";
           }, 1200);
