@@ -71,21 +71,15 @@
       letter-spacing: 0.1em;
     }
 
-    .center.glitch {
-    animation: glitch-content 0.25s steps(1) forwards;
-    }
-    @keyframes glitch-content {
-      0%   { transform: translate(0, 0);     filter: none; }
-      10%  { transform: translate(-8px, 2px);  filter: hue-rotate(90deg) brightness(2); }
-      20%  { transform: translate(6px, -4px);  filter: invert(1); }
-      30%  { transform: translate(-4px, 6px);  filter: hue-rotate(180deg); }
-      40%  { transform: translate(8px, -2px);  filter: invert(1) brightness(3); }
-      50%  { transform: translate(-6px, 4px);  filter: hue-rotate(270deg); }
-      60%  { transform: translate(4px, -6px);  filter: invert(1); }
-      70%  { transform: translate(-2px, 2px);  filter: hue-rotate(45deg) brightness(2); }
-      80%  { transform: translate(6px, 0);     filter: invert(1); }
-      90%  { transform: translate(-4px, -2px); filter: hue-rotate(120deg); }
-      100% { transform: translate(0, 0);     filter: none; }
+  .center.glitch {
+    animation: glitch-content 0.1s steps(1) forwards;
+  }
+  @keyframes glitch-content {
+    0%   { transform: translate(-8px, 2px);  filter: invert(1) brightness(3); }
+    33%  { transform: translate(6px, -4px);  filter: hue-rotate(180deg); }
+    66%  { transform: translate(-4px, 6px);  filter: invert(1); }
+    100% { transform: translate(0, 0);       filter: none; }
+  }
     }
   </style>
 </head>
@@ -103,7 +97,7 @@
     const input  = document.getElementById("answer");
     const center = document.getElementById("center");
 
-    const _h2 = "Hxs="; /* for person messing around with the code, its currently may 9 2026 1:40 am, I think I need some sleep */
+    const _h2 = "Hxs="; /* for person messing around with the code, its currently may 9 2026 1:40 am, my head hurt and I think I need some sleep */
     const _k  = 42;
 
     function _d(s) {
@@ -115,9 +109,9 @@
         if (input.value === _d(_h2)) {
           sessionStorage.setItem("puzzle2_solved", "true");
           center.classList.add("glitch");
-          setTimeout(() => {
-          window.location.href = "tres.html";
-        }, 250);
+        setTimeout(() => {
+        window.location.href = "tres.html";
+        }, 100);
         }
         return;
       }
