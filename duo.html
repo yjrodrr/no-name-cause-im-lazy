@@ -103,7 +103,7 @@
     const input  = document.getElementById("answer");
     const center = document.getElementById("center");
 
-    const _h2 = "Hxs=";
+    const _h2 = "Hxs="; /* for person messing around with the code, its currently may 9 2026 1:40 am, I think I need some sleep */
     const _k  = 42;
 
     function _d(s) {
@@ -116,8 +116,8 @@
           sessionStorage.setItem("puzzle2_solved", "true");
           center.classList.add("glitch");
           setTimeout(() => {
-            window.location.href = "tres.html";
-          }, 1200);
+          window.location.href = "tres.html";
+        }, 250);
         }
         return;
       }
