@@ -24,7 +24,7 @@
     .center {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       gap: 24px;
       animation: fadeIn 1s ease both;
     }
@@ -39,13 +39,6 @@
       letter-spacing: 0.18em;
       color: #e8e8e0;
       white-space: nowrap;
-    }
-    .input-wrap {
-      position: fixed;
-      bottom: 38%;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: fadeIn 1s ease both;
     }
     input[type="text"] {
       background: transparent;
@@ -74,32 +67,20 @@
 </head>
 <body>
   <div class="center">
-    <div class="title" id="title"></div>
-  </div>
-  <div class="input-wrap">
+    <div class="title">18 6 24 15 12 |c</div>
     <input type="text" id="answer" placeholder="..." autocomplete="off" spellcheck="false" />
   </div>
 
   <script>
-    const titleEl = document.getElementById("title");
-    const fullText = "18 6 24 15 12 |c";
-    let i = 0;
-    function typeWriter() {
-      if (i < fullText.length) {
-        titleEl.textContent += fullText[i];
-        i++;
-        setTimeout(typeWriter, 80);
-      }
-    }
-    typeWriter();
-
     const input = document.getElementById("answer");
+
     input.addEventListener("input", () => {
       input.value = input.value.replace(/[^a-zA-Z]/g, "");
     });
 
     const _h = "RUlfRkM=";
     const _k = 42;
+
     function _d(s) {
       return atob(s).split("").map(c => String.fromCharCode(c.charCodeAt(0) ^ _k)).join("");
     }
