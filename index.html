@@ -24,7 +24,7 @@
     .center {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 24px;
       animation: fadeIn 1s ease both;
     }
@@ -34,23 +34,11 @@
     }
     .title {
       font-family: 'Courier Prime', monospace;
-      font-size: clamp(2rem, 5vw, 3.2rem); /* main text, wait why are you here? */
+      font-size: clamp(2rem, 5vw, 3.2rem);
       font-weight: 700;
       letter-spacing: 0.18em;
       color: #e8e8e0;
-      display: flex;
-      align-items: baseline;
       white-space: nowrap;
-      gap: 0.3em;
-      margin-left: 3vw;
-    }
-    .title span {
-      display: inline-block;
-      min-width: 1.2em;
-      text-align: center;
-    }
-    .title .suffix {
-      margin-left: 0.05em;
     }
     input[type="text"] {
       background: transparent;
@@ -84,55 +72,19 @@
   </div>
 
   <script>
-    const encoded  = [18, 6, 24, 15, 12];
-    const suffix   = "|c";
-    const CHARS    = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    const SCRAMBLE_DURATION = 1000;
-    const FRAME_INTERVAL    = 120;
-    const STAGGER           = 200;
-
     const titleEl = document.getElementById("title");
-    const spans   = [];
+    const fullText = "18 6 24 15 12 |c";
+    let i = 0;
 
-    encoded.forEach(num => {
-      const span = document.createElement("span");
-      span.textContent = randomChar(String(num).length);
-      titleEl.appendChild(span);
-      spans.push({ span, target: String(num) });
-    });
-
-    const suffixSpan = document.createElement("span");
-    suffixSpan.className = "suffix";
-    suffixSpan.textContent = randomChar(suffix.length);
-    titleEl.appendChild(suffixSpan);
-    spans.push({ span: suffixSpan, target: suffix });
-
-    function randomChar(len) {
-      let r = "";
-      for (let i = 0; i < len; i++) {
-        r += CHARS[Math.floor(Math.random() * CHARS.length)];
+    function typeWriter() {
+      if (i < fullText.length) {
+        titleEl.textContent += fullText[i];
+        i++;
+        setTimeout(typeWriter, 80);
       }
-      return r;
     }
 
-    function scrambleResolve(span, target, delay) {
-      let elapsed = 0;
-      setTimeout(() => {
-        const timer = setInterval(() => {
-          elapsed += FRAME_INTERVAL;
-          if (elapsed >= SCRAMBLE_DURATION) {
-            clearInterval(timer);
-            span.textContent = target;
-          } else {
-            span.textContent = randomChar(target.length);
-          }
-        }, FRAME_INTERVAL);
-      }, delay);
-    }
-
-    spans.forEach(({ span, target }, i) => {
-      scrambleResolve(span, target, i * STAGGER);
-    });
+    typeWriter();
 
     const input = document.getElementById("answer");
 
@@ -140,7 +92,7 @@
       input.value = input.value.replace(/[^a-zA-Z]/g, "");
     });
 
-    const _h = "RUlfRkM="; /* looking for solution? If you cant do something, it's worth giving up, and theres nothing wrong with that */
+    const _h = "RUlfRkM=";
     const _k = 42;
 
     function _d(s) {
