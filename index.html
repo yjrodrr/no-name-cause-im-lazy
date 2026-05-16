@@ -31,7 +31,7 @@
     }
 
     .center.hide {
-      animation: fadeOut 0.9s ease both;
+      animation: fadeOut 1s ease both;
     }
 
     @keyframes fadeIn {
@@ -104,6 +104,7 @@
         if (input.value.toLowerCase() === _d(_h)) {
           sessionStorage.setItem("puzzle1_solved", "true");
 
+          // Trigger hide animation, then navigate
           container.classList.add("hide");
           container.addEventListener("animationend", () => {
             window.location.href = "duo.html";
