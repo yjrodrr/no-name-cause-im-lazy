@@ -52,6 +52,7 @@
       color: #e8e8e0;
       white-space: nowrap;
       text-align: center;
+      margin-left: 6px;
     }
 
     input[type="text"] {
@@ -61,7 +62,7 @@
       outline: none;
       color: #e8e8e0;
       font-family: 'Courier Prime', monospace;
-      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      font-size: clamp(1rem, 2vw, 1.25rem);
       font-weight: 700;
       letter-spacing: 0.2em;
       text-align: center;
@@ -103,7 +104,6 @@
         if (input.value.toLowerCase() === _d(_h)) {
           sessionStorage.setItem("puzzle1_solved", "true");
 
-          // Trigger hide animation, then navigate
           container.classList.add("hide");
           container.addEventListener("animationend", () => {
             window.location.href = "duo.html";
